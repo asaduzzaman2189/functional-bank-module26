@@ -58,7 +58,7 @@ function updateTotalField(totalFieldId, amount) {
     totalElement.innerText = previousTotal + amount;
 }
 
-
+/* 
 function updateBalance(depositAmount, isAdd) {
     const balanceTotal = document.getElementById('balance-total');
     const balanceTotalText = balanceTotal.innerText;
@@ -72,10 +72,9 @@ function updateBalance(depositAmount, isAdd) {
 
     }
 }
+ */
 
 // উপরের ফাংশনকে মডিফাই করলে ফাংশনটি হবে- 
-
-
 function updateBalance(amount, isAdd) {
     const balanceTotal = document.getElementById('balance-total');
     const balanceTotalText = balanceTotal.innerText;
@@ -90,9 +89,6 @@ function updateBalance(amount, isAdd) {
     }
 }
 
-
-
-
 //handler deposit button
 document.getElementById('deposit-button').addEventListener('click', function () {
     /*     
@@ -101,9 +97,6 @@ document.getElementById('deposit-button').addEventListener('click', function () 
     const depositAmount = parseFloat(depositAmountText);
      */
 
-    // function calling 
-    const depositAmount = getInputValue('deposit-input');
-
     // get and update deposit total
     /*  const depositTotal = document.getElementById('deposit-total');
      const depositTotalText = depositTotal.innerText;
@@ -111,17 +104,18 @@ document.getElementById('deposit-button').addEventListener('click', function () 
  
      depositTotal.innerText = previousDepositTotalAmount + depositAmount; */
 
-    //function calling
-
-    updateTotalField('deposit-total', depositAmount);
-
     //Update balance
     /*   const balanceTotal = document.getElementById('balance-total');
       const balanceTotalText = balanceTotal.innerText;
       const previousBalanceTotal = parseFloat(balanceTotalText);
       balanceTotal.innerText = previousBalanceTotal + depositAmount; */
 
-    // function calling 
+    // clear deposit input 
+    // depositInput.value = '';
+
+    //function calling
+    const depositAmount = getInputValue('deposit-input');
+    updateTotalField('deposit-total', depositAmount);
     updateBalance(depositAmount, true);//যোগ করতে true পাঠাব।
 })
 
@@ -133,9 +127,6 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
     const withdrawAmount = parseFloat(withdrawAmountText); 
     */
 
-    //function calling
-    const withdrawAmount = getInputValue('withdraw-input');
-
     //get and update withdraw total
 
     /*     const withdrawTotal = document.getElementById('withdraw-total');
@@ -143,10 +134,6 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
           const previousWithdrawTotal = parseFloat(previousWithdrawTotalText);
     
           withdrawTotal.innerText = previousWithdrawTotal + withdrawAmount; */
-
-    //function calling
-
-    updateTotalField('withdraw-total', withdrawAmount);
 
     // Update balance
     /*     const balanceTotal = document.getElementById('balance-total');
@@ -156,9 +143,11 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
         balanceTotal.innerText = previousBalanceTotal - withdrawAmount;
      */
 
-    //function calling
-    updateBalance(withdrawAmount, false);//বিয়োগ করতে false পাঠাব।
-
-    // // clear withdraw input 
+    // clear withdraw input 
     // withdrawInput.value = '';
+
+    //function calling
+    const withdrawAmount = getInputValue('withdraw-input');
+    updateTotalField('withdraw-total', withdrawAmount);
+    updateBalance(withdrawAmount, false);//বিয়োগ করতে false পাঠাব।
 })
