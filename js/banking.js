@@ -49,7 +49,7 @@ function updateTotalField(totalFieldId, depositAmount) {
 // উপরের ফাংশনকে মডিফাই করলে ফাংশনটি হবে- 
 
 function updateTotalField(totalFieldId, amount) {
-    debugger;
+
     //Function এর ভিতরে debugger; দিলে সেটি ব্রাউজারে console করা যাবে বা debug করা যাবে। F10 দিয়ে কোডটিকে রান করা যাবে ধাপে ধাপে। 
     const totalElement = document.getElementById(totalFieldId);
     const totalText = totalElement.innerText;
@@ -57,6 +57,39 @@ function updateTotalField(totalFieldId, amount) {
 
     totalElement.innerText = previousTotal + amount;
 }
+
+
+function updateBalance(depositAmount, isAdd) {
+    const balanceTotal = document.getElementById('balance-total');
+    const balanceTotalText = balanceTotal.innerText;
+    const previousBalanceTotal = parseFloat(balanceTotalText);
+    if (isAdd == true) {
+        balanceTotal.innerText = previousBalanceTotal + depositAmount;
+
+    }
+    else {
+        balanceTotal.innerText = previousBalanceTotal - depositAmount;
+
+    }
+}
+
+// উপরের ফাংশনকে মডিফাই করলে ফাংশনটি হবে- 
+
+
+function updateBalance(amount, isAdd) {
+    const balanceTotal = document.getElementById('balance-total');
+    const balanceTotalText = balanceTotal.innerText;
+    const previousBalanceTotal = parseFloat(balanceTotalText);
+    if (isAdd == true) {
+        balanceTotal.innerText = previousBalanceTotal + amount;
+
+    }
+    else {
+        balanceTotal.innerText = previousBalanceTotal - amount;
+
+    }
+}
+
 
 
 
@@ -83,14 +116,13 @@ document.getElementById('deposit-button').addEventListener('click', function () 
     updateTotalField('deposit-total', depositAmount);
 
     //Update balance
-    const balanceTotal = document.getElementById('balance-total');
-    const balanceTotalText = balanceTotal.innerText;
-    const previousBalanceTotal = parseFloat(balanceTotalText);
+    /*   const balanceTotal = document.getElementById('balance-total');
+      const balanceTotalText = balanceTotal.innerText;
+      const previousBalanceTotal = parseFloat(balanceTotalText);
+      balanceTotal.innerText = previousBalanceTotal + depositAmount; */
 
-    balanceTotal.innerText = previousBalanceTotal + depositAmount;
-
-
-
+    // function calling 
+    updateBalance(depositAmount, true);//যোগ করতে true পাঠাব।
 })
 
 //handler withdraw button
@@ -116,14 +148,16 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
 
     updateTotalField('withdraw-total', withdrawAmount);
 
-
-
     // Update balance
-    const balanceTotal = document.getElementById('balance-total');
-    const balanceTotalText = balanceTotal.innerText;
-    const previousBalanceTotal = parseFloat(balanceTotalText);
+    /*     const balanceTotal = document.getElementById('balance-total');
+        const balanceTotalText = balanceTotal.innerText;
+        const previousBalanceTotal = parseFloat(balanceTotalText);
+    
+        balanceTotal.innerText = previousBalanceTotal - withdrawAmount;
+     */
 
-    balanceTotal.innerText = previousBalanceTotal - withdrawAmount;
+    //function calling
+    updateBalance(withdrawAmount, false);//বিয়োগ করতে false পাঠাব।
 
     // // clear withdraw input 
     // withdrawInput.value = '';
