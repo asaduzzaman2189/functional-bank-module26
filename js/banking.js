@@ -7,10 +7,7 @@ const first = doubleIt(5);
 const second = doubleIt(7);
 */
 
-
 // alt+shift+a comment
-
-
 
 /* 
 function getInputValue(inputId) {
@@ -58,6 +55,13 @@ function updateTotalField(totalFieldId, amount) {
     totalElement.innerText = previousTotal + amount;
 }
 
+function getCurrentBalance() {
+    const balanceTotal = document.getElementById('balance-total');
+    const balanceTotalText = balanceTotal.innerText;
+    const previousBalanceTotal = parseFloat(balanceTotalText);
+    return previousBalanceTotal;
+}
+
 /* 
 function updateBalance(depositAmount, isAdd) {
     const balanceTotal = document.getElementById('balance-total');
@@ -77,8 +81,12 @@ function updateBalance(depositAmount, isAdd) {
 // উপরের ফাংশনকে মডিফাই করলে ফাংশনটি হবে- 
 function updateBalance(amount, isAdd) {
     const balanceTotal = document.getElementById('balance-total');
+
+    /*
     const balanceTotalText = balanceTotal.innerText;
     const previousBalanceTotal = parseFloat(balanceTotalText);
+   */
+    const previousBalanceTotal = getCurrentBalance();
     if (isAdd == true) {
         balanceTotal.innerText = previousBalanceTotal + amount;
 
@@ -115,8 +123,10 @@ document.getElementById('deposit-button').addEventListener('click', function () 
 
     //function calling
     const depositAmount = getInputValue('deposit-input');
-    updateTotalField('deposit-total', depositAmount);
-    updateBalance(depositAmount, true);//যোগ করতে true পাঠাব।
+    if (depositAmount > 0) {
+        updateTotalField('deposit-total', depositAmount);
+        updateBalance(depositAmount, true);//যোগ করতে true পাঠাব।
+    }
 })
 
 //handler withdraw button
@@ -148,6 +158,15 @@ document.getElementById('withdraw-button').addEventListener('click', function ()
 
     //function calling
     const withdrawAmount = getInputValue('withdraw-input');
-    updateTotalField('withdraw-total', withdrawAmount);
-    updateBalance(withdrawAmount, false);//বিয়োগ করতে false পাঠাব।
+    const currentBalance = getCurrentBalance();
+    if (withdrawAmount > 0 && withdrawAmount < currentBalance) {
+        updateTotalField('withdraw-total', withdrawAmount);
+        updateBalance(withdrawAmount, false);//বিয়োগ করতে false পাঠাব।
+    }
+    if (withdrawAmount > currentBalance) {
+        console.log('You can not withdraw more than what you have in your Account');
+    }
 })
+
+//যখন ভ্যালু নিয়ে কাজ করব তখন ফাংশন থেকে রিটার্ন করব।
+//যখন ভ্যালু নিয়ে কাজ করব না তখন ফাংশন থেকে রিটার্ন নিতে হবে না। 
